@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Frisbee extends Model
@@ -16,8 +17,8 @@ class Frisbee extends Model
         "name",
         "price",
         "description",
-        "range",
-        "process"
+        "range_id",
+        "process_id"
     ];
 
     /**
@@ -26,5 +27,21 @@ class Frisbee extends Model
     public function ingredients(): BelongsToMany
     {
         return $this->belongsToMany(Ingredient::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function process(): BelongsTo
+    {
+        return $this->belongsTo(Process::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function range(): BelongsTo
+    {
+        return $this->belongsTo(Range::class);
     }
 }
