@@ -6,25 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Frisbee extends Model
+class Ingredient extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
-    protected $fillable = [
-        "name",
-        "price",
-        "description",
-        "range",
-        "process"
-    ];
+    protected $fillable = ["name", "description"];
 
     /**
      * @return BelongsToMany
      */
-    public function ingredients(): BelongsToMany
+    public function frisbee(): BelongsToMany
     {
-        return $this->belongsToMany(Ingredient::class);
+        return $this->belongsToMany(Frisbee::class);
     }
 }

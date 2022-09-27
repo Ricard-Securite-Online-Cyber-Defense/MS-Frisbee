@@ -19,8 +19,6 @@ class CreateFrisbeesTable extends Migration
             $table->float('price');
             $table->string('description');
             $table->string('range');
-            $table->json('ingredients');
-            $table->integer('process');
         });
     }
 
