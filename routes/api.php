@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrisbeeController;
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ProcessController;
 use App\Models\Ingredient;
 use App\Models\Range;
@@ -31,23 +32,10 @@ Route::group(["prefix" => "/frisbee"], function() {
 });
 
 Route::group(["prefix" => "/ingredient"], function() {
-    Route::get("/", function () {
-        return Ingredient::all();
-    });
-    Route::post("/", function (Request $request) {
-        return Ingredient::firstOrCreate(
-            ["name" => $request["name"]],
-            $request->all()
-        );
-    });
-    Route::put("/{id}", function (int $id) {
-        $ingredient = Ingredient::where("id", $id)->firstOrFail();
-        return $ingredient->update(request()->all());
-    });
-    Route::delete("/{id}", function (int $id) {
-        $ingredient = Ingredient::where("id", $id)->firstOrFail();
-        return $ingredient->delete();
-    });
+    Route::get("/", [IngredientController::class, 'index']);
+    Route::post("/", [IngredientController::class, 'store']);
+    Route::put("/{ingredient}", [IngredientController::class, 'update']);
+    Route::delete("/{ingredient}", [IngredientController::class, 'delete']);
 });
 
 Route::group(["prefix" => "/process"], function() {
